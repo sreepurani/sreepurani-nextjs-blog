@@ -5,6 +5,8 @@ import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
 import { GetStaticProps } from 'next'
+import * as gtag from '../lib/gtag'
+
 
 export default function Home({
   allPostsData
@@ -15,11 +17,25 @@ export default function Home({
     id: string
   }[]
 }) {
+  const addToList = () => {
+    gtag.event({action :"add_to_blog", 
+    category : "blog", 
+    label: "comment added" ,
+    value: "working"
+
+    })
+
+  }
+  
   return (
+  
+			
+	
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
+      
       <section className={utilStyles.headingMd}>
         <p>sree here!!</p>
         <p>
@@ -42,9 +58,46 @@ export default function Home({
             </li>
           ))}
         </ul>
+        
       </section>
+      <button onClick={() =>addToList()}>comment</button>
+      <input type="text" id="username" placeholder="Choose Username"></input>
+			<input type="password" id="password" placeholder="Choose Password"></input>
+			<button type="button" onClick={() =>getInfo()}>login</button>
+      <button type="button" onClick={() =>getInfo()}>logout</button>
+      
     </Layout>
   )
+}
+var objPeople = [
+	{ // Object @ 0 index
+		username: "sree",
+		password: "sai"
+	},
+	{ // Object @ 1 index
+		username: "MW",
+		password: "MWTEST"
+	},
+	{ // Object @ 2 index
+		username: "chris",
+		password: "forever"
+	}
+
+]
+
+function getInfo() {
+	var username = document.getElementById('username').value
+	var password = document.getElementById('password').value
+
+	for(var i = 0; i < objPeople.length; i++) {
+		// check is user input matches username and password of a current index of the objPeople array
+		if(username == objPeople[i].username && password == objPeople[i].password) {
+			console.log(username + " is logged in!!!")
+			// stop the function if this is found to be true
+			return
+		}
+	}
+	console.log("incorrect username or password")
 }
 
 export const getStaticProps: GetStaticProps = async () => {
