@@ -2,6 +2,11 @@ import { AppProps ,NextWebVitalsMetric} from 'next/app'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
+import Script from 'next/script'
+import { GA_TRACKING_ID } from '../lib/gtag'
+
+
+
 // export function reportWebVitals(metric: NextWebVitalsMetric) {
 //   switch (metric.name) {
 //     case 'FCP':
@@ -60,7 +65,27 @@ function App({ Component, pageProps }: AppProps) {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
   }, [router.events])
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+      />
+
+      <Script strategy="lazyOnload">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${GA_TRACKING_ID}');
+        `}
+      </Script>
+
+      <Component {...pageProps} />
+    </>
+  );
+
 }
 
 export default App
