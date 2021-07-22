@@ -63,42 +63,42 @@ export default function Home({
       <button onClick={() =>addToList()}>comment</button>
       <input type="text" id="username" placeholder="Choose Username"></input>
 			<input type="password" id="password" placeholder="Choose Password"></input>
-			<button type="button" onClick={() =>getInfo()}>login</button>
-      <button type="button" onClick={() =>getInfo()}>logout</button>
+			{/* <button type="button" onClick={() =>getInfo()}>login</button>
+     <button type="button" onClick={() =>getInfo()}>logout</button> */}
       
     </Layout>
   )
 }
-var objPeople = [
-	{ // Object @ 0 index
-		username: "sree",
-		password: "sai"
-	},
-	{ // Object @ 1 index
-		username: "MW",
-		password: "MWTEST"
-	},
-	{ // Object @ 2 index
-		username: "chris",
-		password: "forever"
-	}
+// var objPeople = [
+// 	{ // Object @ 0 index
+// 		username: "sree",
+// 		password: "sai"
+// 	},
+// 	{ // Object @ 1 index
+// 		username: "MW",
+// 		password: "MWTEST"
+// 	},
+// 	{ // Object @ 2 index
+// 		username: "chris",
+// 		password: "forever"
+// 	}
 
-]
+// ]
 
-function getInfo() {
-	var username = document.getElementById('username').value
-	var password = document.getElementById('password').value
+// function getInfo() {
+// 	var username = document.getElementById('username').value
+// 	var password = document.getElementById('password').value
 
-	for(var i = 0; i < objPeople.length; i++) {
-		// check is user input matches username and password of a current index of the objPeople array
-		if(username == objPeople[i].username && password == objPeople[i].password) {
-			console.log(username + " is logged in!!!")
-			// stop the function if this is found to be true
-			return
-		}
-	}
-	console.log("incorrect username or password")
-}
+// 	for(var i = 0; i < objPeople.length; i++) {
+// 		// check is user input matches username and password of a current index of the objPeople array
+// 		if(username == objPeople[i].username && password == objPeople[i].password) {
+// 			console.log(username + " is logged in!!!")
+// 			// stop the function if this is found to be true
+// 			return
+// 		}
+// 	}
+// 	console.log("incorrect username or password")
+// }
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData()
