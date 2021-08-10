@@ -42,17 +42,17 @@ import { GA_TRACKING_ID } from '../lib/gtag'
 declare const window: any;
 
 
-export function reportWebVitals({ id, name, label, value }) {
-  // Use `window.gtag` if you initialized Google Analytics as this example:
-  // https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_document.js
-  window.gtag('event', name, {
-    event_category:
-      label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
-    value: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
-    event_label: id, // id unique to current page load
-    non_interaction: true, // avoids affecting bounce rate.
-  })
-}
+// export function reportWebVitals({ id, name, label, value }) {
+//   // Use `window.gtag` if you initialized Google Analytics as this example:
+//   // https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_document.js
+//   window.gtag('event', name, {
+//     event_category:
+//       label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
+//     value: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
+//     event_label: id, // id unique to current page load
+//     non_interaction: true, // avoids affecting bounce rate.
+//   })
+// }
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -79,6 +79,9 @@ function App({ Component, pageProps }: AppProps) {
           gtag('js', new Date());
 
           gtag('config', '${GA_TRACKING_ID}');
+          gtag('config', '${GA_TRACKING_ID}', {
+            user_id: '_pJC6-0pjW_9hcoRuNuZeRCIrS20'
+           });
         `}
       </Script>
 
